@@ -1,0 +1,9 @@
+name: AIO
+version: 1.0.0
+author: flaxeneel2
+softdepend:
+  - PlaceholderAPI
+main: io.github.flaxeneel2.AIO.Main
+commands:
+  aio:
+    description: "base command ig"

@@ -1,0 +1,9 @@
+#welp, this is just a test config so no use really
+connection:
+  SQL:
+    enabled: false
+    host: "127.0.0.1"
+    port: "3306"
+    database: "dbname"
+    username: "user"
+    password: "P@55W0RD"
