@@ -18,18 +18,20 @@ public final class Main extends JavaPlugin implements CommandExecutor {
     private static final ConsoleCommandSender log = Bukkit.getConsoleSender();
     public static SettingsManager settings = new SettingsManager();
     @Override
+    //this executes on plugin startup
     public void onEnable() {
-        settings.checkngenfiles(this);
+        settings.checkngenfiles(this); //runs the function in io.github.flaxeneel2.AIO.SettingsManager to generate files
         sendToConsole("&d==============================");
         sendToConsole("&2&l     AIO Enabled            ");
         sendToConsole("&d==============================");
         try {
-            new AIO(this);
+            new AIO(this); //registers the command
         } catch(Error error) {
             sendToConsole("&cError!\n" + error.toString());
         }
-        boolean isSQLEnabled = settings.getConfig().getBoolean("connection.SQL.enabled");
+        boolean isSQLEnabled = settings.getConfig().getBoolean("connection.SQL.enabled"); //checks if SQL is enabled in the config file
         if(isSQLEnabled) {
+            //just gets the credentials
             sendToConsole("&2SQL is enabled! trying to connect with given credentials");
             String host = getConfig().getString("connection.SQL.host");
             String port = getConfig().getString("connection.SQL.port");
@@ -37,6 +39,7 @@ public final class Main extends JavaPlugin implements CommandExecutor {
             String username = getConfig().getString("connection.SQL.username");
             String password = getConfig().getString("connection.SQL.password");
             try {
+                //tries connecting to the database with given credentials
                 SQL.connect(host, port, dbname, username, password);
             }
             catch (ClassNotFoundException | SQLException e) {
@@ -49,14 +52,17 @@ public final class Main extends JavaPlugin implements CommandExecutor {
     }
 
     @Override
+    //this executes on plugin shut down
     public void onDisable() {
         sendToConsole("&d==============================");
         sendToConsole("&c&l     AIO Disabled           ");
         sendToConsole("&d==============================");
     }
+    //a function which processes color codes and makes it easier to send messages with color to the console
     public static void sendToConsole(String message) {
         log.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
     }
+    //same as the function above, just for players
     public static void sendToPlayer(Player p, String m) {
         p.sendMessage(ChatColor.translateAlternateColorCodes('&', m));
     }

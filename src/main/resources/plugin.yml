@@ -1,9 +1,14 @@
-name: AIO
-version: 1.0.0
-author: flaxeneel2
+name: AIO #name of the plugin (in this case, AIO)
+version: 1.0.0 #version of the plugin
+author: flaxeneel2 #author (in this case, me)
 softdepend:
-  - PlaceholderAPI
-main: io.github.flaxeneel2.AIO.Main
+  - PlaceholderAPI #softdepend on PlaceHolderAPI for a future commit
+main: io.github.flaxeneel2.AIO.Main #main file of the plugin
+
+#Commands bellow
 commands:
   aio:
-    description: "base command ig"
+    description: "base command"
+    aliases:
+      - allinone
+      - aliastest

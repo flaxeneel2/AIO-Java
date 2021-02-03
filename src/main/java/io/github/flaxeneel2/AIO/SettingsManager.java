@@ -25,10 +25,12 @@ public class SettingsManager {
     public void checkngenfiles(Plugin p) {
         if(!p.getDataFolder().exists()) {
             boolean success = p.getDataFolder().mkdir();
+            //just some debug, this sends if the plugin folder was made properly or not, true if made properly and false if not
             Main.sendToConsole("&6&lStatus: " + success);
         }
         if(!(new File(p.getDataFolder(), "config.yml").exists())) copy("/config.yml", "/config.yml", p);
         if(!(new File(p.getDataFolder(), "data.yml").exists())) copy("/data.yml", "/data.yml", p);
+        //the 2 lines below was just a test to see how well the copy function made below will manage if i tell it to make a file in a folder which does not exist
         if(!(new File(p.getDataFolder(), "data/data.yml").exists())) copy("/data.yml", "/data/data.yml", p);
         if(!(new File(p.getDataFolder(), "data/data/data/data.yml").exists())) copy("/data.yml", "/data/data/data/data.yml", p);
         this.cfile = new File(p.getDataFolder(), "config.yml");
@@ -45,7 +47,7 @@ public class SettingsManager {
         try {
             Files.copy(file, path);
         } catch (IOException e) {
-            Main.sendToConsole("&c&lOops, error!");
+            Main.sendToConsole("&c&lError!");
             e.printStackTrace();
         }
     }

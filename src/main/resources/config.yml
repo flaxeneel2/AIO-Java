@@ -1,4 +1,4 @@
-#welp, this is just a test config so no use really
+#this is a test config from which we can pull settings.
 connection:
   SQL:
     enabled: false
