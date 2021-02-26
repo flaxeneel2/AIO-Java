@@ -1,6 +1,8 @@
 package io.github.flaxeneel2.AIO;
 
 import io.github.flaxeneel2.AIO.Commands.AIO;
+import io.github.flaxeneel2.AIO.Commands.Balance;
+import io.github.flaxeneel2.AIO.Commands.SetBalance;
 import io.github.flaxeneel2.AIO.databases.SQL.SQL;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -17,17 +19,23 @@ public final class Main extends JavaPlugin implements CommandExecutor {
 
     private static final ConsoleCommandSender log = Bukkit.getConsoleSender();
     public static SettingsManager settings = new SettingsManager();
+    public static SQL db = new SQL();
+    public static Main inst;
     @Override
     //this executes on plugin startup
     public void onEnable() {
         settings.checkngenfiles(this); //runs the function in io.github.flaxeneel2.AIO.SettingsManager to generate files
+        inst = this;
         sendToConsole("&d==============================");
         sendToConsole("&2&l     AIO Enabled            ");
         sendToConsole("&d==============================");
         try {
             new AIO(this); //registers the command
+            new Balance(this);
+            new SetBalance(this);
         } catch(Error error) {
-            sendToConsole("&cError!\n" + error.toString());
+            sendToConsole("&cError!");
+            error.printStackTrace();
         }
         boolean isSQLEnabled = settings.getConfig().getBoolean("connection.SQL.enabled"); //checks if SQL is enabled in the config file
         if(isSQLEnabled) {
@@ -40,9 +48,8 @@ public final class Main extends JavaPlugin implements CommandExecutor {
             String password = getConfig().getString("connection.SQL.password");
             try {
                 //tries connecting to the database with given credentials
-                SQL.connect(host, port, dbname, username, password);
-            }
-            catch (ClassNotFoundException | SQLException e) {
+                db.connect(host, port, dbname, username, password);
+            } catch (ClassNotFoundException | SQLException e) {
                 sendToConsole("&c&lError!");
                 e.printStackTrace();
             } finally {
@@ -59,11 +66,11 @@ public final class Main extends JavaPlugin implements CommandExecutor {
         sendToConsole("&d==============================");
     }
     //a function which processes color codes and makes it easier to send messages with color to the console
-    public static void sendToConsole(String message) {
+    public void sendToConsole(String message) {
         log.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
     }
     //same as the function above, just for players
-    public static void sendToPlayer(Player p, String m) {
+    public void sendToPlayer(Player p, String m) {
         p.sendMessage(ChatColor.translateAlternateColorCodes('&', m));
     }
 }

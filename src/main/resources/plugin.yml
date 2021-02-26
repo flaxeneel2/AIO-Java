@@ -12,3 +12,11 @@ commands:
     aliases:
       - allinone
       - aliastest
+  balance:
+    description: "shows balance"
+    aliases:
+      - bal
+  setbalance:
+    description: "Sets a player's balance"
+    aliases:
+      - setbal

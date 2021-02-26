@@ -15,15 +15,15 @@ public class AIO implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if(strings.length == 0) {
-            Main.sendToPlayer((Player) commandSender, "placeholder");
+            Main.inst.sendToPlayer((Player) commandSender, "placeholder");
             return true;
         }
         if(strings[0].equalsIgnoreCase("help")) {
-            Main.sendToPlayer((Player) commandSender,"-=-=-=-=-=-=-=-=-=-=[AIO]-=-=-=-=-=-=-=-=-=-=");
+            Main.inst.sendToPlayer((Player) commandSender,"-=-=-=-=-=-=-=-=-=-=[AIO]-=-=-=-=-=-=-=-=-=-=");
             if(commandSender.hasPermission("aio.admin")) {
-                Main.sendToPlayer((Player) commandSender, "you are an admin!");
+                Main.inst.sendToPlayer((Player) commandSender, "/setbal <player> <amount>: sets a player's balance");
             }
-            Main.sendToPlayer((Player) commandSender, "placeholder");
+            Main.inst.sendToPlayer((Player) commandSender, "/bal [player]: shows a player's balance (or yours if player not specified)");
             return true;
         }
         return false;

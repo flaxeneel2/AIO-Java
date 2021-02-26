@@ -26,7 +26,7 @@ public class SettingsManager {
         if(!p.getDataFolder().exists()) {
             boolean success = p.getDataFolder().mkdir();
             //just some debug, this sends if the plugin folder was made properly or not, true if made properly and false if not
-            Main.sendToConsole("&6&lStatus: " + success);
+            Main.inst.sendToConsole("&6&lStatus: " + success);
         }
         if(!(new File(p.getDataFolder(), "config.yml").exists())) copy("/config.yml", "/config.yml", p);
         if(!(new File(p.getDataFolder(), "data.yml").exists())) copy("/data.yml", "/data.yml", p);
@@ -43,11 +43,11 @@ public class SettingsManager {
         InputStream file = SettingsManager.class.getResourceAsStream(filename);
         checkSubFolders(reldest, p);
         Path path = Paths.get((p.getDataFolder().getPath() + reldest));
-        Main.sendToConsole(path.toString());
+        Main.inst.sendToConsole(path.toString());
         try {
             Files.copy(file, path);
         } catch (IOException e) {
-            Main.sendToConsole("&c&lError!");
+            Main.inst.sendToConsole("&c&lError!");
             e.printStackTrace();
         }
     }
